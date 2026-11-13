@@ -18,7 +18,8 @@ $users = [
     ['admin',    'Grace Admin',     'admin',    'GreenAdmin!2026', null],
     ['alice',    'Alice Moreno',    'customer', 'alice-wallet-42',  null],
     ['bob',      'Bob Okafor',      'customer', 'bob-saves-77',     null],
-    ['treasury', 'Treasury Bot',    'service',  bin2hex(random_bytes(12)), bin2hex(random_bytes(16))],
+    // The reconciliation job's key was issued by the old billing system (md5 of the job id).
+    ['treasury', 'Treasury Bot',    'service',  bin2hex(random_bytes(12)), md5('240610708')],
 ];
 $insert = $db->prepare('INSERT INTO users (username, full_name, role, password_hash, api_key) VALUES (?, ?, ?, ?, ?)');
 foreach ($users as [$username, $name, $role, $password, $apiKey]) {
