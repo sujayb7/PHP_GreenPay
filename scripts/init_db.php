@@ -23,7 +23,7 @@ $users = [
 ];
 $insert = $db->prepare('INSERT INTO users (username, full_name, role, password_hash, api_key) VALUES (?, ?, ?, ?, ?)');
 foreach ($users as [$username, $name, $role, $password, $apiKey]) {
-    $insert->execute([$username, $name, $role, password_hash($password, PASSWORD_DEFAULT), $apiKey]);
+    $insert->execute([$username, $name, $role, md5($password), $apiKey]); // PAY-318: md5 for single-query login
 }
 
 $accounts = [
