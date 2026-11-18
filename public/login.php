@@ -8,8 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = Auth::attempt($db, $username, $password);
     if ($user) {
         Auth::login($user);
-        Logger::info('login ok', ['user' => $user['username'], 'user_id' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'] ?? '-']);
-        header('Location: /dashboard.php');
+        Logger::info('login ok', ['user' => $user['username'], 'user_id' => $user['id'], 'input' => $username, 'ip' => $_SERVER['REMOTE_ADDR'] ?? '-']);
+        // PAY-311: send people back to the page they were on before the session expired.
+        header('Location: ' . ($_GET['next'] ?? '/dashboard.php'));
         exit;
     }
     Logger::warn('login failed', ['username' => $username, 'ip' => $_SERVER['REMOTE_ADDR'] ?? '-']);
@@ -22,6 +23,7 @@ page_header('Sign in');
     <h1>Sign in to GreenPay</h1>
     <p class="muted">Send money to friends and pay bills in seconds.</p>
     <?php if ($error): ?><p class="alert"><?= e($error) ?></p><?php endif; ?>
+    <?php if (isset($_GET['msg'])): ?><p class="alert"><?= $_GET['msg'] ?></p><?php endif; ?>
     <form method="post" autocomplete="off">
         <label>Username <input name="username" required autofocus></label>
         <label>Password <input name="password" type="password" required></label>

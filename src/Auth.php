@@ -38,7 +38,7 @@ final class Auth
     {
         $user = self::user($db);
         if ($user === null) {
-            header('Location: /login.php');
+            header('Location: /login.php?msg=' . urlencode('Please sign in to continue.') . '&next=' . urlencode($_SERVER['REQUEST_URI'] ?? '/'));
             exit;
         }
         return $user;
