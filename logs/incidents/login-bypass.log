@@ -1,0 +1,8 @@
+2026-11-19T04:52:00.659Z INFO  greenpay login failed username=admin ip=203.0.113.47
+2026-11-19T04:53:00.659Z WARN  greenpay login failed username="admin' OR 1=1 --" ip=203.0.113.47
+2026-11-19T04:54:00.659Z ERROR greenpay PDOException: SQLSTATE[HY000]: near "--": syntax error in src/Auth.php:19 path=/login.php ip=203.0.113.47
+2026-11-19T04:56:00.659Z INFO  greenpay login ok user=admin user_id=1 input="admin'--" ip=203.0.113.47
+2026-11-19T04:57:00.659Z INFO  greenpay transfer ok from=ACC-1001 to=ACC-7788 amount=90000 user_id=1 ip=203.0.113.47
+2026-11-19T04:59:00.659Z INFO  greenpay transfer ok from=ACC-1001 to=ACC-7788 amount=85000 user_id=1 ip=203.0.113.47
+2026-11-19T05:01:00.659Z WARN  greenpay transfer rejected from=ACC-1001 to=ACC-7788 amount=90000 user_id=1
+2026-11-19T05:14:00.659Z INFO  greenpay login ok user=alice user_id=2 input=alice ip=198.51.100.9
